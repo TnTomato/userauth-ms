@@ -48,20 +48,6 @@ class TokenGenerator(Token):
         s = encrypt('.'.join([h, p]), self.secret)[0]
         return '.'.join([h, p, s])
 
-    def validate(self, token: str=None):
-        # TODO(zxc): validate token outside this object
-        now = datetime.now()
-        if token:
-            encoded_payload = token.split('.')[1]
-            payload = json.loads(base64.urlsafe_b64decode(encoded_payload))
-            iat = datetime.strptime(payload['iat'], '%Y-%m-%d %H:%M:%S')
-            expiration = payload['exp']
-        else:
-            iat = datetime.strptime(self.payload['iat'], '%Y-%m-%d %H:%M:%S')
-            expiration = self.payload['exp']
-        delta = (now - iat).seconds
-        return True if delta <= expiration else False
-
 
 class TokenParser(Token):
 
@@ -83,8 +69,3 @@ class TokenValidator(Token):
         expiration = payload['exp']
         delta = (now - iat).seconds
         return True, payload if delta <= expiration else False, None
-
-if __name__ == '__main__':
-    t = TokenGenerator(User(username='zxc', password='asdasd'))
-    print(t)
-    print(t.validate())
