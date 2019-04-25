@@ -11,7 +11,6 @@ from app.decorators import set_response, exception_handler, token_validator
 
 
 class RESTfulView(views.MethodView):
-
     decorators = [exception_handler]
 
     @classmethod
@@ -20,5 +19,4 @@ class RESTfulView(views.MethodView):
 
 
 class LoginRequiredView(RESTfulView):
-
     decorators = [token_validator, exception_handler]

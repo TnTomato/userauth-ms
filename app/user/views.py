@@ -14,7 +14,6 @@ from app.utils.crypto import encrypt
 from app.utils.restful import RESTfulView, LoginRequiredView
 from app.utils.token import TokenGenerator
 
-
 user_bp = Blueprint('user', __name__, template_folder='templates')
 
 
@@ -65,6 +64,8 @@ class Test(LoginRequiredView):
         return jsonify(result)
 
 
-user_bp.add_url_rule('/v1/user/register', view_func=UserRegister.as_view('register_view'))
-user_bp.add_url_rule('/v1/user/login', view_func=UserLogin.as_view('login_view'))
+user_bp.add_url_rule('/v1/user/register',
+                     view_func=UserRegister.as_view('register_view'))
+user_bp.add_url_rule('/v1/user/login',
+                     view_func=UserLogin.as_view('login_view'))
 user_bp.add_url_rule('/test', view_func=Test.as_view('test'))
