@@ -6,14 +6,15 @@
 
 
 import traceback
+
 from flask import jsonify, request
 
-from app.ext import cache
 from app.exceptions import CustomException, ServerException, LoginRequiredError
+from app.ext import cache
 from app.utils.token import TokenParser
 
 
-def set_response(code: int=200, msg: str='ok', data=None):
+def set_response(code: int=200, msg: str='ok', data=None) -> dict:
     if not data:
         data = []
     return {
@@ -42,6 +43,7 @@ def exception_handler(func):
         except Exception as err:
             msg = traceback.format_exc()
             return jsonify(set_response(500, msg))
+
     return wrapper
 
 
@@ -59,4 +61,5 @@ def token_validator(func):
             else:
                 raise LoginRequiredError('Invalid token')
         return func(*args, **kwargs)
+
     return wrapper

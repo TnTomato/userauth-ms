@@ -19,10 +19,10 @@ class Token(object):
         'alg': 'HS256'
     }
     _payload = {
-        'iss': 'Aegis',  # 签发者 Issuer
-        'exp': 7200,  # 过期时间 Expiration time
-        'sub': 'Authorization',  # 主题 Subject
-        'aud': 'Aegis-User',  # 受众 Audience
+        'iss': 'Aegis',  # Issuer
+        'exp': 7200,  # Expiration time
+        'sub': 'Authorization',  # Subject
+        'aud': 'Aegis-User',  # Audience
     }
     _secret = 'ec#j0$n%xv3w_(ca'
 
@@ -34,8 +34,8 @@ class TokenGenerator(Token):
         self.payload = self._payload
         self.secret = self._secret
         self.payload.update({
-            'iat': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),  # 签发时间 Issued at
-            'jti': str(uuid.uuid1()),  # 唯一标识 JWT id
+            'iat': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),  # Issued at
+            'jti': str(uuid.uuid1()),  # JWT id
             'username': user_obj.username
         })
 

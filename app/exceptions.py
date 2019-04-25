@@ -7,17 +7,20 @@
 
 class CustomException(Exception):
     """Bad Request"""
+
     def __init__(self, msg):
         self.error = (400, msg)
 
 
 class ServerException(Exception):
     """Internal Server Error"""
+
     def __init__(self, msg):
         self.error = (500, msg)
 
 
 class LoginRequiredError(Exception):
     """Not authorized"""
+
     def __init__(self, msg):
         self.error = (401, msg)
