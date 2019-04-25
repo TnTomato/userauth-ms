@@ -1,1 +1,1 @@
-A micro-service for user authentication built with python3.7 based on Flask
+A lightweight micro-service for user authentication built with python3.7 based on Flask
